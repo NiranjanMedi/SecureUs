@@ -4,9 +4,6 @@ SecureUs is a web platform that provides real-time-style safety scores for locat
 
 Using a combination of open crime datasets, incident reports (including data originally gathered via a news API), and geospatial information from the Google Maps API, SecureUs computes a location-specific safety score and explains why an area is rated the way it is. All data is preprocessed offline in Python (Pandas, NumPy) and stored in a static database that the React frontend loads at runtime.
 
-> Deployed project / demo: [SecureUs](<add-demo-or-video-link-here>)  
-> GitHub repo: [SecureUs](<add-this-repo-url-here>)
-
 ---
 
 ## Features
