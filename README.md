@@ -1,70 +1,94 @@
-# Getting Started with Create React App
+# SecureUs
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+SecureUs is a web platform that provides real-time safety scores for locations in Bangalore, with a focus on helping women make more informed decisions about where to live, work, and travel.
 
-## Available Scripts
+Using a combination of open crime datasets, live incident reports (via a news API), and geospatial data from the Google Maps API, SecureUs computes a location-specific safety score and explains why an area is rated the way it is.
 
-In the project directory, you can run:
+> Deployed project / demo: [SecureUs](<add-demo-or-video-link-here>)  
+> GitHub repo: [SecureUs](<add-this-repo-url-here>)
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Interactive map interface  
+  - Search by address or drop a pin anywhere in Bangalore.  
+  - View color-coded regions by safety score.
 
-### `npm test`
+- Safety score for each location  
+  - Aggregates multiple signals:  
+    - Incident frequency and density  
+    - Type/severity of crimes  
+    - Time-of-day effects  
+  - Outputs a single, easy-to-understand numeric score plus a qualitative label (e.g., Low / Medium / High risk).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Scoring model and explanation  
+  - Weighted model combines historical and near real-time data.  
+  - Users see why an area is considered safe/unsafe (for example: “High incident density of theft at night in the last X months”).
 
-### `npm run build`
+- Data-driven backend  
+  - Pipelines to periodically pull and clean crime/incident data.  
+  - Integration with a news API to capture recent safety-related events.  
+  - Geocoding and reverse geocoding via Google Maps API.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Built with real stakeholders  
+  - Piloted and iterated with feedback from local organizations and the Office of the Director General of Police (Karnataka).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## High-Level Architecture
 
-### `npm run eject`
+SecureUs is structured around three main components:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. **Data Layer**  
+   - Ingests crime and incident data from:
+     - Government / public crime datasets  
+     - News API (safety-related incidents)  
+   - Cleans and normalizes data.  
+   - Persists to a database (e.g., PostgreSQL / MongoDB).  
+   - (Adjust this to your actual database.)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. **Backend API**  
+   - Exposes REST endpoints for:
+     - `/score?lat=...&lng=...` – compute safety score for a given coordinate  
+     - `/explain?lat=...&lng=...` – return factors contributing to the score  
+     - `/heatmap` – return aggregated data to render a heatmap  
+   - Handles:
+     - Scoring logic  
+     - Time-of-day and incident weighting  
+     - Rate limiting and input validation
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. **Frontend Web App**  
+   - Interactive map (Google Maps or similar mapping library).  
+   - Search bar, pin-drop interaction, and location selection.  
+   - Visual display of:
+     - Safety score  
+     - Explanation and recent incidents  
+     - Color-coded risk visualization.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Note: Update the tech stack and API routes above to exactly match your implementation.
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Tech Stack
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Update this section to match your actual codebase. Example:
 
-### Code Splitting
+- **Frontend:** `<React / Vue / plain JS + HTML/CSS>`  
+- **Backend:** `<Flask / Django / Node.js / Express / etc.>`  
+- **Database:** `<PostgreSQL / MongoDB / SQLite / etc.>`  
+- **APIs:**
+  - Google Maps API (geocoding, maps)
+  - News API for incident reports
+- **Other:**
+  - `<Any libraries for charts, mapping (Leaflet, Mapbox, etc.)>`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## Getting Started
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 1. Clone the repository
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+git clone <your-repo-url-here>
+cd secureus
