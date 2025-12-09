@@ -12,7 +12,7 @@ Using a combination of open crime datasets, live incident reports (via a news AP
 ## Features
 
 - Interactive map interface  
-  - Search by address or drop a pin anywhere in Bangalore.  
+  - Search by address or drop a pin anywhere in India.  
   - View color-coded regions by safety score.
 
 - Safety score for each location  
